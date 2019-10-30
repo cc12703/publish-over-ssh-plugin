@@ -92,6 +92,14 @@ public class BapSshPublisherPluginDescriptor extends BuildStepDescriptor<Publish
         return hostConfigurations.getView();
     }
 
+
+    public void setHostConfigurations(List<BapSshHostConfiguration> configs) {
+        for(BapSshHostConfiguration config : configs) {
+            config.setCommonConfig(commonConfig);
+            hostConfigurations.add(config);
+        }
+    }
+
     public BapSshHostConfiguration getConfiguration(final String name) {
         for (BapSshHostConfiguration configuration : hostConfigurations) {
             if (configuration.getName().equals(name)) {
