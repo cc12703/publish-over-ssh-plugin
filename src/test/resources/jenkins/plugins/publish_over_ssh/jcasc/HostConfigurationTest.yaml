@@ -1,0 +1,11 @@
+
+unclassified:
+  sshPublisher:
+    hostConfigurations:
+      - name: "test.host"
+        key: "test"
+        hostname: "ftp.test.com"
+        username: "test.name"
+        port: 2022
+        overrideKey: true
+        remoteRootDir: "/user/test/"
