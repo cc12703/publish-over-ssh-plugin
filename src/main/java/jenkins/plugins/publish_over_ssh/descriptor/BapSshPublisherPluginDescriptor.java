@@ -96,9 +96,11 @@ public class BapSshPublisherPluginDescriptor extends BuildStepDescriptor<Publish
     public void setHostConfigurations(List<BapSshHostConfiguration> configs) {
         for(BapSshHostConfiguration config : configs) {
             config.setCommonConfig(commonConfig);
-            hostConfigurations.add(config);
         }
+        hostConfigurations.replaceBy(configs);
     }
+
+
 
     public BapSshHostConfiguration getConfiguration(final String name) {
         for (BapSshHostConfiguration configuration : hostConfigurations) {
@@ -115,8 +117,22 @@ public class BapSshPublisherPluginDescriptor extends BuildStepDescriptor<Publish
      * @param configuration Host Configuration to add. The common configuration will be automatically set.
      */
     public void addHostConfiguration(final BapSshHostConfiguration configuration) {
+        if(existsHostConfiguration(configuration.getName()))
+            return;
+
+
         configuration.setCommonConfig(commonConfig);
         hostConfigurations.add(configuration);
+    }
+
+
+    private boolean existsHostConfiguration(final String name) {
+        for (BapSshHostConfiguration configuration : hostConfigurations) {
+            if (configuration.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
